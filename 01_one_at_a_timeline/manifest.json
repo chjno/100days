@@ -1,0 +1,9 @@
+{
+  "name": "One at a Time(line)",
+  "manifest_version": 2,
+  "version": "0.2",
+  "content_scripts": [{
+    "matches": [ "*://www.facebook.com/" ],
+    "js": ["content_script.js"]
+  }]
+}
