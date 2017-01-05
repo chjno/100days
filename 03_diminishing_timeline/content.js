@@ -15,8 +15,8 @@ var getPosts = function(){
 var shrinkPosts = function(){
   for (var i = postIndex; i < posts.length; i++){
     if (postIndex > 0){
-      posts[i].setAttribute('style','transform:scale(' + (1 - Math.tanh(.1 * postIndex)) + ');');
-    }    
+      posts[i].setAttribute('style','transform:scale(' + (1 - Math.tanh(0.1 * postIndex)) + ');');
+    }
     postIndex++;
   }
 };
