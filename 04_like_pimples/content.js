@@ -1,4 +1,5 @@
 var thumb = chrome.extension.getURL('thumb.png');
+var postIndex = 0;
 
 var getLikeElts = function(){
   var children = [];
@@ -8,7 +9,7 @@ var getLikeElts = function(){
 
 var getParentElts = function(likeElts){
   var elts = [];
-  for (var i = 0; i < likeElts.length; i++){
+  for (var i = postIndex; i < likeElts.length; i++){
     var parent = likeElts[i].parentElement;
     while (parent.id.indexOf('hyperfeed_story_id_') == -1){
       parent = parent.parentElement;
@@ -24,10 +25,10 @@ var getParentElts = function(likeElts){
   return elts;
 };
 
-var getLikeStrings = function(posts){
+var getLikeStrings = function(likeElts){
   var strings = [];
-  for (var i = 0; i < posts.length; i++){
-    var child = posts[i].firstChild;
+  for (var i = postIndex; i < likeElts.length; i++){
+    var child = likeElts[i].firstChild;
     var text = child.innerText || child.textContent;
     strings.push(text);
   }
@@ -65,9 +66,9 @@ var parseLikes = function(s){
 
       likes += names.split(',').length;
 
-      // if last element is a number
+      // if last element starts with a number
       if (parseInt(lastItem[0], 10)){
-        hasK(lastItem[0].split(' ')[0]);
+        hasK(lastItem.split(' ')[0]);
 
       // if last element is a name
       } else {
@@ -90,50 +91,55 @@ var getLikes = function(likeStrings){
   return likes;
 };
 
-// var observer = new MutationObserver(function(mutations) {
-//     mutations.forEach(function(mutation) {
-//       getPosts();
-//     });
-// });
+var randInt = function(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
 
-// var config = {
-//     attributes: true,
-//     childList: true,
-//     characterData: true
-// };
+var breakOut = function(parentElts, likes){
+  for (var i = 0; i < parentElts.length; i++){
+    var myDiv = parentElts[i];
+    myDiv.setAttribute('style', 'position: relative;');
 
-// getPosts();
-// observer.observe(document.body, config);
+    var height = myDiv.offsetHeight;
+    for (var j = 0; j < likes[i]; j++){
+      if (j > height * 5){
+        // console.log('max: ' + height * 5);
+        break;
+      }
+      var img = document.createElement("img");
+      img.setAttribute('src', thumb);
+      img.setAttribute('style', "display:block; position: absolute; top:" + randInt(1,96) +
+        "%; left:" + randInt(1,96) + "%; z-index:1000;");
+      myDiv.appendChild(img);
+    }
+  }
+
+  postIndex += parentElts.length;
+};
+
+var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      var likeElts = getLikeElts();
+      var parentElts = getParentElts(likeElts);
+      var likeStrings = getLikeStrings(likeElts);
+      var likes = getLikes(likeStrings);
+
+      breakOut(parentElts, likes);
+    });
+});
+
+var config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+};
 
 var likeElts = getLikeElts();
 var parentElts = getParentElts(likeElts);
 var likeStrings = getLikeStrings(likeElts);
 var likes = getLikes(likeStrings);
+breakOut(parentElts, likes);
 
-console.log(likeElts.length);
-console.log(parentElts.length);
-console.log(likeStrings.length);
-console.log(likes.length);
-
-
-
-var myDiv = parentElts[0];
-var width = myDiv.offsetWidth;
-var height = myDiv.offsetHeight;
-
-console.log(width);
-console.log(height);
-
-var img = document.createElement("img");
-img.setAttribute('src', thumb);
-img.setAttribute('style', 'margin-top:-' + height/2 + 'px;margin-left:' + width/2 + 'px;');
-
-myDiv.insertBefore(img, myDiv.firstChild);
-
-
-console.log(myDiv);
-
-
-
-
-
+observer.observe(document.body, config);
