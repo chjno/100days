@@ -103,7 +103,8 @@ var detectChanges = function(){
 var init = function(){
   myDiv = document.createElement('div');
   myDiv.id = 'tallyDiv';
-  myDiv.setAttribute('style', 'position: fixed; top: 50px; left: 10px; color: red;');
+  // myDiv.setAttribute('style', 'position: fixed; top: 50px; left: 10px; color: red;');
+  myDiv.setAttribute('style', 'position: fixed; top: 50px; left: 10px; color: red; overflow: scroll; height: 100vh;');
   document.body.appendChild(myDiv);
 
   update(myDiv);
