@@ -1,5 +1,4 @@
 var getUserElts = function(){
-  var children = [];
   var elts = document.getElementsByClassName('_5va4');
   return elts;
 };
@@ -12,20 +11,6 @@ var parseNames = function(userElts){
     names.push(text);
   }
   return names;
-};
-
-var tallyNames = function(names){
-  var tallies = [];
-  for (var i = 0; i < names.length; i++){
-    if (tallies.hasOwnProperty(names[i])){
-      tallies[names[i]]++;
-    } else {
-      tallies[names[i]] = 1;
-    }
-  }
-  tallies.sort(function (a, b) {
-    return a - b;
-  });
 };
 
 var tallyNames = function(names){
