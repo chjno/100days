@@ -1,0 +1,10 @@
+{
+  "name": "Like Alert",
+  "manifest_version": 2,
+  "version": "0.1",
+  "content_scripts": [{
+    "matches": [ "*://www.facebook.com/" ],
+    "js": ["jquery.js", "jquery.visible.js", "content.js"]
+  }],
+  "web_accessible_resources": ["ig1.png","ig2.png","ig3.png","ig4.png"]
+}
