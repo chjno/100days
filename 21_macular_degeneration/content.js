@@ -80,21 +80,23 @@ function visiblePosts(){
 
 function isVisible(post){
   var windowTop = $(window).scrollTop();
-  var windowBottom = windowTop + $(window).height();
+  var windowHeight = $(window).height();
+  var windowBottom = windowTop + windowHeight;
   var windowCenter = windowTop + ((windowBottom - windowTop) / 2);
 
   var eltTop = $(post).offset().top;
   var eltBottom = eltTop + $(post).height();
   var eltCenter = eltTop + ((eltBottom - eltTop) / 2);
 
-  if (eltCenter > windowTop && eltCenter < windowBottom){
-    var num;
-    if (eltCenter < windowCenter){
-      num = eltCenter - windowTop;
-    } else {
-      num = windowBottom - eltCenter;
-    }
-    var opVal = num.map(0, ($(window).height() / 2), 1, 0);
+  if (eltTop < (windowBottom - windowHeight / 4) && eltTop >= windowCenter){
+    num = eltTop - windowCenter;
+    var opVal = num.map(0, ((windowBottom - windowHeight / 4) - windowCenter), 0, 1);
+    post.setAttribute('style', 'opacity:' + opVal + ';');
+  } else if (eltTop < windowCenter && eltBottom > windowCenter){
+    post.setAttribute('style', 'opacity: 0;');
+  } else if (eltBottom < windowCenter && eltBottom > (windowTop + windowHeight/4)){
+    num = windowCenter - eltBottom;
+    var opVal = num.map(0, (windowCenter - (windowTop + windowHeight/4)), 0, 1);
     post.setAttribute('style', 'opacity:' + opVal + ';');
   }
 }
