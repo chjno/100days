@@ -1,0 +1,9 @@
+{
+  "name": "Trumpline",
+  "manifest_version": 2,
+  "version": "0.1",
+  "content_scripts": [{
+    "matches": [ "*://www.facebook.com/" ],
+    "js": ["jquery.js", "content.js"]
+  }]
+}
