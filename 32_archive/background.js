@@ -13,6 +13,7 @@ chrome.webNavigation.onTabReplaced.addListener(function (details){
     }
     if (lookups.hasOwnProperty(tab.url)){
       if (lookups[tab.url] !== null){
+        console.log('opening from lookups');
         chrome.tabs.update(tabId, {url: lookups[tab.url]});
       }
     } else {
