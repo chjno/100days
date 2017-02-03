@@ -73,13 +73,13 @@ function searchOld(tabId, link, year){
 
       chrome.tabs.update(tabId, {url: target});
     } else {
-      if (year >= new Date().getFullYear()){
+      // if (year >= new Date().getFullYear()){
         lookups[link] = null;
         chrome.tabs.update(tabId, {url: link});
-      } else {
-        year++;
-        searchOld(tabId, link, year);
-      }
+      // } else {
+      //   year++;
+      //   searchOld(tabId, link, year);
+      // }
     }
   });
 }
