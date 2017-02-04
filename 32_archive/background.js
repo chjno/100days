@@ -8,9 +8,7 @@ chrome.webNavigation.onTabReplaced.addListener(function (details){
   var tabId = details.tabId;
 
   chrome.tabs.get(tabId, function (tab){
-    if (tab.url.indexOf('//web.archive.org') == -1 && tab.url.indexOf('http') === 0 && !lookups.hasOwnProperty(tab.url)){
-      chrome.tabs.executeScript(tabId, {code:"document.body.innerHTML = 'loading...'"});
-    }
+
     if (lookups.hasOwnProperty(tab.url)){
       if (lookups[tab.url] !== null){
         console.log('opening from lookups');
@@ -19,6 +17,7 @@ chrome.webNavigation.onTabReplaced.addListener(function (details){
     } else {
 
       if (tab.url.indexOf('//web.archive.org') == -1 && tab.url.indexOf('http') === 0){
+        chrome.tabs.executeScript(tabId, {code:"document.body.innerHTML = 'loading...'"});
         searchOld(tabId, tab.url, 1996);
       }
 
@@ -59,7 +58,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     }
   }
 });
-
 
 function searchOld(tabId, link, year){
   console.log('searching ' + year);
