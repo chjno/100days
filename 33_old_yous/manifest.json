@@ -1,0 +1,13 @@
+{
+  "name": "Old Yous",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["jquery.js", "background.js"]
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "<all_urls>"
+  ]
+}
