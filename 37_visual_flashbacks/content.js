@@ -19,6 +19,6 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
     }
   });
 
-  var randImg = imgs[randInt(0, imgs.length - 1)];
+  var randImg = imgs[randInt(0, imgs.length)];
   randImg.src = msg;
 });
