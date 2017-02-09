@@ -29,7 +29,6 @@ observePage();
 $(function (){
 });
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
-  console.log(msg);
   if (msg){
     newGame();
     animate = true;
