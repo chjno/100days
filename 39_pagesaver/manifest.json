@@ -1,0 +1,17 @@
+{
+  "name": "Pagesaver",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["jquery.js", "background.js"]
+  },
+  "content_scripts": [{
+    "matches": [ "<all_urls>" ],
+    "js": ["jquery.js", "p5.js", "sketch.js", "content.js"],
+    "run_at": "document_start"
+  }],
+  "permissions": [
+    "tabs",
+    "idle"
+  ]
+}
