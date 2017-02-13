@@ -78,7 +78,8 @@ var bufferLoader = new BufferLoader(context, [
   'sounds/2_high_low_slow.wav', // 11 lonely
   'sounds/3_annoying.wav', // 12 lonely
   'sounds/3_forceful.wav',
-  'sounds/3_long_ones.wav', // 14 scroll
+  // 'sounds/3_long_ones.wav', // 14 scroll
+  'sounds/2_scroll.wav', // 14 scroll
   'sounds/3_low_high.wav',
   'sounds/3_quiet.wav', // 16 lonely
   'sounds/3_slow.wav',
