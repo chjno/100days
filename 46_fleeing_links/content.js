@@ -32,11 +32,6 @@ function onMouseEnter(e){
       el.style.transform = 'matrix(1,0,0,1,' + deltas.join(', ') + ')';
       el.style.width = width + 'px';
       el.style.height = height + 'px';
-
-      var top = $(el).offset().top - $(window).scrollTop();
-      var bottom = top + $(el).height();
-      var left = $(el).offset().left - $(window).scrollLeft();
-      var right = left + $(el).width();
     }
 
     fleeIntervals[el] = setInterval(flee, 4);
