@@ -1,21 +1,3 @@
-function parentElt(streamElt){
-  var parent;
-  if (streamElt.children[0]){
-    parent = streamElt.children[0];
-    if (parent.children[0]){
-      while (parent.children[0].id.indexOf('hyperfeed_story_id_') == -1){
-        parent = parent.children[0];
-        if (!parent.children[0]){
-          return null;
-        }
-      }
-    }
-  } else {
-    return null;
-  }
-  return parent;
-}
-
 function likeAll(stream){
   var likeElts = stream.getElementsByClassName('UFILikeLink');
   for (var i = 0; i < likeElts.length; i++){
