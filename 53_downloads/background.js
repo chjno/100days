@@ -30,8 +30,8 @@ function setDownloading(bool){
       chrome.downloads.resume(downloadIds[i]);
     }
   } else {
-    for (var i = 0; i < downloadIds.length; i++){
-      chrome.downloads.pause(downloadIds[i]);
+    for (var j = 0; j < downloadIds.length; j++){
+      chrome.downloads.pause(downloadIds[j]);
     }
   }
 }
