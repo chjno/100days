@@ -1,40 +1,40 @@
 // on resize window
-// variable opacity based on time spent
-// can't click links under img
 
-var initTimeout;
-$(window).scroll(function (e){
-  clearTimeout(initTimeout);
-  clearInterval(timeInterval);
+$(function (){
+  var resetTimeout;
+  $(window).scroll(function (e){
+    clearTimeout(resetTimeout);
+    clearTimeout(timer);
 
-  initTimeout = setTimeout(init, 500);
+    resetTimeout = setTimeout(resetTimer, 500);
+  });
 });
 
-var totalTime;
-var then;
-var timeInterval;
-
 function init(){
-  console.log('init');
-  totalTime = 0;
-  chrome.runtime.sendMessage(totalTime);
-  timeInterval = setInterval(checkTime, 2000);
+  chrome.runtime.sendMessage('init');
 }
 
-function checkTime(){
-  totalTime += 2;
-  chrome.runtime.sendMessage(totalTime);
+var timer;
+function resetTimer(){
+  console.log('starting timer');
+  timer = setTimeout(burnTime, 15000);
+}
+
+function burnTime(){
+  chrome.runtime.sendMessage('burn');
 }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
+  console.log(msg);
   if (msg.type == 'image'){
-    img.src = msg.url;
-    console.log(img);
+    if (!img.src){
+      img.src = msg.url;
+    }
   } else {
     if (msg.active){
-      init();
+      resetTimer();
     } else {
-      clearInterval(timeInterval);
+      clearTimeout(timer);
     }
   }
 });
@@ -43,8 +43,7 @@ init();
 
 var img = document.createElement('img');
 $(img).css({
-  'max-width': '100%',
-  'max-height': '100%'
+  'pointer-events': 'none'
 });
 
 
@@ -57,7 +56,8 @@ $(div).css({
   'left':'0',
   'width':'100%',
   'height':'100%',
-  'opacity': '0.3'
+  'opacity': '0.3',
+  'pointer-events': 'none'
 });
 var divZ = 0;
 

@@ -7,11 +7,11 @@
   },
   "content_scripts": [{
     "matches": [ "<all_urls>" ],
-    "js": ["jquery.js", "content.js"]
+    "js": ["jquery.js", "content.js"],
+    "run_at": "document_start"
   }],
   "permissions": [
     "<all_urls>",
-    "tabs",
-    "webNavigation"
+    "tabs"
   ]
 }
