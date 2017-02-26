@@ -1,5 +1,5 @@
 {
-  "name": "Pointing Stick",
+  "name": "Magic Nub",
   "manifest_version": 2,
   "version": "0.1",
   "background": {
@@ -10,8 +10,5 @@
     "js": ["jquery.js", "content.js"],
     "run_at": "document_start"
   }],
-  "web_accessible_resources": ["img/ps.jpeg", "img/hand_small.png", "img/pointer_small.png"],
-  "permissions": [
-    "webNavigation"
-  ]
+  "web_accessible_resources": ["img/ps.jpeg", "img/hand_small.png", "img/pointer_small.png"]
 }
