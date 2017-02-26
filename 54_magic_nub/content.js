@@ -50,6 +50,8 @@ $(function (){
     // return false;
   });
 
+  $('a').css('text-decoration', 'none');
+
   $(menuDiv).append(backDiv, forwardDiv, reloadDiv);
   document.body.appendChild(menuDiv);
 
