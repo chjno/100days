@@ -1,5 +1,5 @@
 var page = chrome.extension.getURL('popup/ps.html');
-var tp = window.open(page, "ps", "width=300, height=322");
+window.open(page, "ps", "width=300, height=322");
 
 var currentTabId = 0;
 chrome.tabs.onActivated.addListener(function (activeInfo){
@@ -19,9 +19,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     chrome.tabs.sendMessage(currentTabId, coords);
   } else if (msg.type == 'openLink'){
     chrome.tabs.update(currentTabId, {url: msg.url})
-  }
-
-  {
+  } else {
     chrome.tabs.sendMessage(currentTabId, msg);
   }
 });
