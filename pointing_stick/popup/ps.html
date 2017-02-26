@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title></title>
+  <script src='jquery.js'></script>
+  <style>
+    body {
+      padding:0;
+      margin:0;
+      overflow:hidden;
+      background-image: url('img/ps.jpeg');
+    }
+
+    #ps {
+      position: fixed;
+      left: 140;
+      top: 105;
+      width: 20px;
+      height: 20px;
+      /*visibility: hidden;*/
+    }
+
+    #l {
+      position: fixed;
+      left: 8;
+      top: 247;
+      width: 110px;
+      height: 50px;
+      /*visibility: hidden;*/
+    }
+
+    #m {
+      position: fixed;
+      left: 130;
+      top: 260;
+      width: 40px;
+      height: 38px;
+      /*visibility: hidden;*/
+    }
+
+    #r {
+      position: fixed;
+      left: 185;
+      top: 247;
+      width: 110px;
+      height: 50px;
+      /*visibility: hidden;*/
+    }
+
+  </style>
+</head>
+<body>
+  <!-- <img src="img/ps.jpeg" style="display: block;" draggable="false"> -->
+  <div id='ps' class='hold'></div>
+  <div id='m' class='hold'></div>
+  <div id='l' class='click'></div>
+  <div id='r' class='click'></div>
+  <script src='ps.js'></script>
+</body>
+</html>
