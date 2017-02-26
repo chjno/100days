@@ -1,4 +1,4 @@
-var page = chrome.extension.getURL('ps.html');
+var page = chrome.extension.getURL('popup/ps.html');
 var tp = window.open(page, "ps", "width=300, height=322");
 
 var currentTabId = 0;
