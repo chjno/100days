@@ -14,7 +14,6 @@ function tagTrump(){
       $(this).addClass('f-trump');
     }
   });
-  console.log($('.f-trump'));
 }
 
 function observe(){
