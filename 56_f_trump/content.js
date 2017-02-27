@@ -1,5 +1,5 @@
 var finger = chrome.extension.getURL('finger_small.png');
-var style = $('<style>.f-trump { cursor: url(' + finger + '), auto; }</style>');
+var style = $('<style>.f-trump { cursor: url(' + finger + ') 12 2, auto; }</style>');
 $('head').append(style);
 
 $.expr[":"].Contains = $.expr.createPseudo(function(arg) {
