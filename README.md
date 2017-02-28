@@ -10,3 +10,9 @@ __Installing a Chrome extension from source files:__
 3. Enable Developer Mode at the top right.
 4. Click “Load unpacked extension…”
 5. Select the folder containing the source files.
+
+
+__Available in the Chrome Web Store:__
+
+* [F
+* Trump](https://chrome.google.com/webstore/detail/f-trump/icjfmidpjblnpkpjljcgcijhjehdepcm)
