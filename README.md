@@ -14,5 +14,4 @@ __Installing a Chrome extension from source files:__
 
 __Available in the Chrome Web Store:__
 
-* [F
-* Trump](https://chrome.google.com/webstore/detail/f-trump/icjfmidpjblnpkpjljcgcijhjehdepcm)
+* [F Trump](https://chrome.google.com/webstore/detail/f-trump/icjfmidpjblnpkpjljcgcijhjehdepcm)
