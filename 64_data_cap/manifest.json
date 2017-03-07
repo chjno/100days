@@ -1,0 +1,16 @@
+{
+  "name": "Data Cap",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "debugger",
+    "tabs"
+  ]
+}
