@@ -5,15 +5,17 @@ function updateHistory(){
     console.log(hist);
   });
 }
-updateHistory();
 
 function cleanup(){
   clearCache();
   updateHistory();
 }
 
+cleanup();
+
+
 function getNext(tab){
-  var domain = tab.url.match(/http?.:\/\/.*?\//);
+  var domain = tab.url.match(/http?.:\/\/.*?\//)[0];
 
   console.log('domain ', domain);
 
@@ -37,9 +39,8 @@ function getNext(tab){
         tabPages[tab.id].loading = true;
       });
     } else {
-      tabPages[tab.id].processing = false;
+      // tabPages[tab.id].processing = false;
       tabPages[tab.id].loading = false;
-      cleanup();
     }
 
   // });
@@ -61,12 +62,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab){
     }
 
     if (!tabPages[tabId].processing && tab.url != tabPages[tabId].next){
+      console.log('processing');
       tabPages[tabId].processing = true;
       tabPages[tabId].requested = tab.url;
       getNext(tab);
     }
 
     if (tabPages[tabId].loading && changeInfo.status == 'complete'){
+      console.log('complete');
       tabPages[tabId].processing = false;
       tabPages[tabId].loading = false;
       cleanup();
@@ -79,3 +82,32 @@ function clearCache(){
     console.log('cache cleared');
   });
 }
+
+chrome.webNavigation.onTabReplaced.addListener(function (details){
+  console.log(details);
+
+//   chrome.tabs.get(details.tabId, function (tab){
+//     if (tab.url.indexOf('http') === 0){
+//       if (!tabPages.hasOwnProperty(tab.id)){
+//         tabPages[tab.id] = {
+//           requested: undefined,
+//           next: undefined,
+//           processing: false,
+//           loading: false
+//         };
+//       }
+
+//       if (!tabPages[tab.id].processing && tab.url != tabPages[tab.id].next){
+//         tabPages[tab.id].processing = true;
+//         tabPages[tab.id].requested = tab.url;
+//         getNext(tab);
+//       }
+
+//       if (tabPages[tab.id].loading && changeInfo.status == 'complete'){
+//         tabPages[tab.id].processing = false;
+//         tabPages[tab.id].loading = false;
+//         cleanup();
+//       }
+//     }
+//   });
+});

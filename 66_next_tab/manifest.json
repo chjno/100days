@@ -12,6 +12,7 @@
   "permissions":[
     "history",
     "tabs",
-    "browsingData"
+    "browsingData",
+    "webNavigation"
   ]
 }
