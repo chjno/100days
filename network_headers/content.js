@@ -1,6 +1,3 @@
-chrome.runtime.sendMessage({type: 'loading'});
-var loaded = false;
-
 var widthTimeout;
 $(window).resize(function (e) {
   clearTimeout(widthTimeout);
@@ -9,25 +6,10 @@ $(window).resize(function (e) {
   }, 100);
 });
 
-$(function (){
-  if (window.location.href == 'http://itp.chino.kim/blankmark/icon.html'){
-    chrome.runtime.sendMessage({type: 'blank'});
-  } else if (window.location.href == 'http://itp.chino.kim/blankmark/env.html'){
-    chrome.runtime.sendMessage({type: 'blank2'});
-  }
-});
-
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
-  if (msg.type == 'loaded'){
-    if (loaded){
-      sendResponse({type: 'loaded'});
-    } else {
-      sendResponse({type: 'loading'});
-    }
-  }
-});
-
 window.onload = function () {
-  chrome.runtime.sendMessage({type: 'loaded'});
-  loaded = true;
-}
+  if (window.location.href.indexOf('itp.chino.kim/blankmark') != -1){
+    var pages = window.location.href.split('/');
+    var page = pages[pages.length-1];
+    chrome.runtime.sendMessage({type: 'blank', page: page});
+  }
+};
