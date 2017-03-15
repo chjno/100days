@@ -6,8 +6,8 @@ window.onresize = function(e) {
   }, 100);
 };
 
-$(function (){
+window.onload = function () {
   if (window.location.href == 'http://itp.chino.kim/blankmark/icon.html'){
     chrome.runtime.sendMessage({type: 'blank'});
   }
-});
+};

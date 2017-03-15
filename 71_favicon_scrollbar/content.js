@@ -6,12 +6,12 @@ $(window).resize(function (e) {
   }, 100);
 });
 
-$(function (){
+window.onload = function () {
   sendScrollPosition();
   if (window.location.href == 'http://itp.chino.kim/blankmark/icon.html'){
     chrome.runtime.sendMessage({type: 'blank'});
   }
-});
+};
 
 $(window).scroll(function (e){
   sendScrollPosition();
