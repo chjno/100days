@@ -32,7 +32,7 @@ function Packet(){
   this.update = function(){
     var index = this.bookmark.index--;
     if (index >= 0){
-      chrome.bookmarks.move(this.bookmark.id, {parentId: '1', index: index}, function (b){
+      chrome.bookmarks.move(this.bookmark.id, {parentId: '1', index: index}, function (){
         if (chrome.runtime.lastError) {
           console.log(chrome.runtime.lastError.message);
         }
@@ -41,9 +41,17 @@ function Packet(){
     } else {
       chrome.bookmarks.remove(this.bookmark.id, function (){
         if (chrome.runtime.lastError) {
-          console.log(chrome.runtime.lastError.message);
-          this.update();
-          return;
+          chrome.bookmarks.getChildren('1', function (bookmarks){
+            for (var b of bookmarks){
+              if (b.url.indexOf('env.html') != -1){
+                chrome.bookmarks.remove(b.id, function (){
+                  if (chrome.runtime.lastError) {
+                    console.log(chrome.runtime.lastError.message);
+                  }
+                });
+              }
+            }
+          });
         }
       });
       iconCount--;
