@@ -12,6 +12,16 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab){
   }
 });
 
+chrome.tabs.onReplaced.addListener(function (tabId, removedTabId){
+  chrome.tabs.get(tabId, function (tab){
+    if (tab.url != tabUrls[removedTabId]){
+      tabUrls[tabId] = tab.url;
+      delete tabUrls[removedTabId];
+      book(tab.url);
+    }
+  });
+});
+
 function book(url){
   chrome.bookmarks.getRecent(1, function (bookmarks){
     if (bookmarks.length === 0 || bookmarks[0].url != url){
