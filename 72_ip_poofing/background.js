@@ -129,7 +129,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
     } else if (msg.page == 'env.html'){
       envWin.close();
     }
-  } else if (msg.type == 'blank2'){
+  } else if (msg.type == 'width'){
+    adjustBlankWidth(msg.width);
   }
 });
 
