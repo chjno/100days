@@ -1,0 +1,18 @@
+{
+  "name": "Tab Overflow",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": [ "<all_urls>" ],
+    "css": ["style.css"],
+    "run_at": "document_start"
+  }],
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": ["jquery.js", "inject.js"]
+}
