@@ -22,7 +22,7 @@ function duck(msg, tabId){
       var text = results[resultIndex]['Text'];
       // var text = results[0]['Text'];
       if (text){
-        console.log(text);
+        // console.log(text);
         chrome.tabs.sendMessage(tabId, {type: 'title', id: msg.id, text: text});
       } else {
         var qIndex = words.indexOf(q);
