@@ -43,7 +43,7 @@ function clearBar(){
       title: '',
       url: blankmark
     }, function (b){
-      console.log('bookmark updated', bid, letter);
+      // console.log('bookmark updated', bid, letter);
     });
   }
 
@@ -54,7 +54,7 @@ function clearBar(){
       title: '',
       url: blankmark
     }, function (b){
-      console.log('bookmark created', b.id, letter);
+      // console.log('bookmark created', b.id, letter);
       bookmarkIds[letter] = b.id;
     });
   }
