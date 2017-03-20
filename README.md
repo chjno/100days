@@ -17,5 +17,4 @@ __Installing a Chrome extension from source files:__
 __Available in the Chrome Web Store:__
 
 * [F Trump](https://chrome.google.com/webstore/detail/f-trump/icjfmidpjblnpkpjljcgcijhjehdepcm)
-* [Magic
-* Nub](https://chrome.google.com/webstore/detail/magic-nub/jeedokkgokhppaojphmlbgogaddgckpa)
+* [Magic Nub](https://chrome.google.com/webstore/detail/magic-nub/jeedokkgokhppaojphmlbgogaddgckpa)
