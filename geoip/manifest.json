@@ -1,0 +1,14 @@
+{
+  "name": "Click Distance",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["hidden.js"]
+  },
+  "content_scripts": [{
+    "matches": [ "https://*/*" ],
+    "js": ["jquery.js", "content.js"],
+    "run_at": "document_start"
+  }],
+  "web_accessible_resources": ["GeoLite2-City.mmdb"]
+}

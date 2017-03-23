@@ -1,0 +1,18 @@
+{
+  "name": "geoip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "geoip-lite": "^1.2.0",
+    "geoip2": "^1.0.5",
+    "geolib": "^2.0.22",
+    "maxmind": "^2.2.0",
+    "public-ip": "^2.3.3"
+  }
+}
