@@ -1,10 +1,6 @@
 var rid = chrome.runtime.id;
 figlet.defaults({fontPath: 'chrome-extension://' + rid});
 
-$(function (){
-  $('h1,h2,h3,h4,h5,h6').each(figit);
-});
-
 var sizes = {
   'h1': '50%',
   'h2': '45%',
@@ -51,3 +47,31 @@ function randInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+function observe(){
+  function process(){
+    $('h1,h2,h3,h4,h5,h6').each(figit);
+  }
+
+  var timeout;
+  function setDelay(){
+    clearTimeout(timeout);
+    timeout = setTimeout(process, 500);
+  }
+
+  var config = {
+    attributes: true,
+    childList: true,
+    characterData: true,
+    subtree: true
+  };
+
+  var observer = new MutationObserver(function (mutations) {
+    setDelay();
+  });
+
+  observer.observe(document.body, config);
+}
+
+$('h1,h2,h3,h4,h5,h6').each(figit);
+observe();
