@@ -1,0 +1,8 @@
+{
+  "name": "Tabstop",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
