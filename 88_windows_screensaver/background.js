@@ -20,30 +20,21 @@ var originalWins = [];
 
 chrome.system.display.getInfo(function (ds){
   for (var display of ds){
-    console.log(display.bounds);
+    // console.log(display.bounds);
     displays.push(display.bounds);
   }
 });
 
-// chrome.windows.getCurrent(function (win){
-//   console.log(win);
-
-//   for (var display of displays){
-//     if (win.left >= display.left && win.left <= display.left + display.width
-//       && win.top >= display.top && win.top <= display.top + display.height){
-//       console.log('win is in display', displays.indexOf(display));
-//     }
-//   }
-// });
-
-chrome.idle.setDetectionInterval(15);
+chrome.idle.setDetectionInterval(30);
 chrome.idle.onStateChanged.addListener(function (idleState){
-  console.log(idleState);
+  // console.log(idleState);
   if (idleState == 'active'){
     idle = false;
+    chrome.power.releaseKeepAwake();
     backToNormal();
   } else {
     idle = true;
+    chrome.power.requestKeepAwake('display');
     screenSave();
   }
 });
@@ -70,7 +61,7 @@ function shrink(winId, bounds){
     width: 100,
     height: 100
   };
-  console.log(params);
+  // console.log(params);
   chrome.windows.update(winId, params, function (w){
     w.speedX = randSignedInt(1,10);
     w.speedY = randSignedInt(1,10);
