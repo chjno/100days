@@ -1,0 +1,17 @@
+{
+  "name": "No",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "commands": {
+    "yes_please": {
+      "description": "Yes",
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      }
+    }
+  }
+}
