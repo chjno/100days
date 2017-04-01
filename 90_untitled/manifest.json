@@ -1,0 +1,10 @@
+{
+  "name": "Untitled",
+  "manifest_version": 2,
+  "version": "0.1",
+  "content_scripts": [{
+    "matches": [ "<all_urls>" ],
+    "js": ["content.js"]
+  }],
+  "web_accessible_resources": ["icon.png"]
+}
