@@ -1,0 +1,15 @@
+{
+  "name": "Scale Win",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": [ "<all_urls>" ],
+    "js": ["jquery.js", "content.js"]
+  }],
+  "permissions": [
+    "system.display"
+  ]
+}
