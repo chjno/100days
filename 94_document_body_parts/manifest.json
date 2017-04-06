@@ -1,0 +1,12 @@
+{
+  "name": "Document Body Parts",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "system.display"
+  ],
+  "web_accessible_resources": ["parts/*"]
+}
