@@ -8,5 +8,5 @@
   "permissions": [
     "system.display"
   ],
-  "web_accessible_resources": ["parts/*"]
+  "web_accessible_resources": ["limbs/*"]
 }

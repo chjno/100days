@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title></title>
+  <title>eye</title>
   <script src="tracking-min.js"></script>
   <script src="face-min.js"></script>
   <script src="face.js"></script>
@@ -10,10 +10,15 @@
       margin: 0;
       overflow: hidden;
     }
+    img {
+      position: fixed;
+    }
   </style>
 </head>
 <body>
-  <video id="video" preload autoplay loop muted></video>
+  <img id="ball" src="ball.png"></img>
+  <img id="eye" src="eye.png"></img>
+  <video id="video" preload autoplay loop muted style="visibility: hidden;"></video>
   <!-- <video id="video" width="320" height="240" preload autoplay loop muted></video> -->
 </body>
 </html>

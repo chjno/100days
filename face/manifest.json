@@ -5,7 +5,7 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "web_accessible_resources": ["face/*"],
+  "web_accessible_resources": ["tracking/*"],
   "permissions": [
     "system.display",
     "tabs"

@@ -1,13 +1,21 @@
-var leftArmHtml = chrome.extension.getURL('parts/left-arm.html');
-var rightArmHtml = chrome.extension.getURL('parts/right-arm.html');
-var leftFootHtml = chrome.extension.getURL('parts/left-foot.html');
-var rightFootHtml = chrome.extension.getURL('parts/right-foot.html');
-var headHtml = chrome.extension.getURL('parts/head.html');
+var leftArmHtml = chrome.extension.getURL('limbs/left-arm.html');
+var rightArmHtml = chrome.extension.getURL('limbs/right-arm.html');
+var leftFootHtml = chrome.extension.getURL('limbs/left-foot.html');
+var rightFootHtml = chrome.extension.getURL('limbs/right-foot.html');
+var headHtml = chrome.extension.getURL('limbs/head.html');
 var leftArm;
 var rightArm;
 var leftFoot;
 var rightFoot;
 var head;
+
+var armWidth = 100;
+var armHeight = 230;
+var footWidth = 100;
+var footHeight = 100;
+var headHeight = 262;
+var headWidth = 320;
+var titleBar = 22;
 
 var displays = [];
 chrome.system.display.getInfo(function (ds){
@@ -22,29 +30,29 @@ function bodify(win){
       win.top >= display.top && win.top <= display.top + display.height){
 
         var update = false;
-        if (win.left - display.left < 100){
-          win.left = display.left + 100;
+        if (win.left - display.left < armWidth){
+          win.left = display.left + armWidth;
           update = true;
         }
 
         win.right = win.left + win.width;
         display.right = display.left + display.width;
 
-        if (display.right - win.right < 100){
-          win.width = display.right - win.left - 100;
+        if (display.right - win.right < armWidth){
+          win.width = display.right - win.left - armWidth;
           update = true;
         }
 
-        if (win.top - display.top < 263){
-          win.top = display.top + 263;
+        if (win.top - display.top <= headHeight + titleBar){
+          win.top = display.top + headHeight + titleBar + 1;
           update = true;
         }
 
         win.bottom = win.top + win.height;
         display.bottom = display.top + display.height;
 
-        if (display.bottom - win.bottom < 100){
-          win.height = display.bottom - win.top - 100;
+        if (display.bottom - win.bottom < footHeight){
+          win.height = display.bottom - win.top - footHeight;
           update = true;
         }
 
@@ -68,20 +76,20 @@ function bodify(win){
 }
 
 function appendage(win){
-  var headLeft = win.left + (win.width / 2) - 160;
-  var headTop = win.top - 240;
+  var headLeft = win.left + (win.width / 2) - (headWidth / 2);
+  var headTop = win.top - headHeight;
 
   head.moveTo(headLeft, headTop);
 
   var armTop = win.top + (win.height / 4);
-  var laLeft = win.left - 100;
+  var laLeft = win.left - armWidth;
   var raLeft = win.left + win.width;
   leftArm.moveTo(laLeft, armTop);
   rightArm.moveTo(raLeft, armTop);
 
-  var footTop = win.top + win.height - 22;
-  var lfLeft = win.left + (win.width / 4) - 50;
-  var rfLeft = win.left + (win.width / 4) * 3 - 50;
+  var footTop = win.top + win.height - titleBar;
+  var lfLeft = win.left + (win.width / 4) - (footWidth / 2);
+  var rfLeft = win.left + (win.width / 4) * 3 - (footWidth / 2);
   leftFoot.moveTo(lfLeft, footTop);
   rightFoot.moveTo(rfLeft, footTop);
 
@@ -95,11 +103,11 @@ var currentWin;
 
 chrome.windows.getCurrent({}, function (win){
   currentWin = win;
-  leftArm = window.open(leftArmHtml, '', 'width=100, height=230');
-  rightArm = window.open(rightArmHtml, '', 'width=100, height=230');
-  leftFoot = window.open(leftFootHtml, '', 'width=100, height=100');
-  rightFoot = window.open(rightFootHtml, '', 'width=100, height=100');
-  head = window.open(headHtml, '', 'width=320, height=240');
+  leftArm = window.open(leftArmHtml, '', 'width=' + armWidth + ', height=' + armHeight);
+  rightArm = window.open(rightArmHtml, '', 'width=' + armWidth + ', height=' + armHeight);
+  leftFoot = window.open(leftFootHtml, '', 'width=' + footWidth + ', height=' + footHeight);
+  rightFoot = window.open(rightFootHtml, '', 'width=' + footWidth + ', height=' + footHeight);
+  head = window.open(headHtml, '', 'width=' + headWidth + ', height=' + headHeight);
 });
 
 var refocusing = false;
