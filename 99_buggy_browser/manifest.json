@@ -1,0 +1,20 @@
+{
+  "name": "Buggy Browser",
+  "manifest_version": 2,
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "system.display"
+  ],
+  "commands": {
+    "kill": {
+      "description": "kill",
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      }
+    }
+  }
+}
