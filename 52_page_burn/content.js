@@ -1,8 +1,12 @@
-// on resize window
+var timer;
+var img = document.createElement('img');
+var div = document.createElement('div');
+var divZ = 0;
 
-$(function (){
+// on resize window
+$(function () {
   var resetTimeout;
-  $(window).scroll(function (e){
+  $(window).scroll(function (e) {
     clearTimeout(resetTimeout);
     clearTimeout(timer);
 
@@ -10,28 +14,27 @@ $(function (){
   });
 });
 
-function init(){
-  chrome.runtime.sendMessage('init');
+function init() {
+  chrome.runtime.sendMessage({ type: 'init' });
 }
 
-var timer;
-function resetTimer(){
+function resetTimer() {
   console.log('starting timer');
-  timer = setTimeout(burnTime, 15000);
+  timer = setTimeout(burn, 10000);
 }
 
-function burnTime(){
-  chrome.runtime.sendMessage('burn');
+function burn() {
+  var scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+  chrome.runtime.sendMessage({ type: 'burn', scrollBarWidth: scrollBarWidth });
 }
 
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   console.log(msg);
-  if (msg.type == 'image'){
-    if (!img.src){
-      img.src = msg.url;
-    }
+  if (msg.type == 'image') {
+    img.src = msg.url;
+    $(div).css('width', 'calc(100% + ' + msg.scrollBarWidth + 'px)');
   } else {
-    if (msg.active){
+    if (msg.active) {
       resetTimer();
     } else {
       clearTimeout(timer);
@@ -39,35 +42,29 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse){
   }
 });
 
-init();
-
-var img = document.createElement('img');
 $(img).css({
-  'pointer-events': 'none'
+  'pointer-events': 'none',
+  'width': '100%',
+  'height': '100%',
 });
 
-
-var div = document.createElement('div');
 $(div).append(img);
-$(div).attr('id', 'div');
+$(div).attr('id', 'burned-image');
 $(div).css({
-  'position':'fixed',
-  'top':'0',
-  'left':'0',
-  'width':'100%',
-  'height':'100%',
+  'position': 'fixed',
+  'top': '0',
+  'left': '0',
+  'width': '100%',
+  'height': '100%',
   'opacity': '0.3',
   'pointer-events': 'none'
 });
-var divZ = 0;
-
 
 var observer = new MutationObserver(function (mutations) {
-
   /*
     if div gets overwritten during page load
   */
-  if ($('#div').length === 0){
+  if ($('#burned-image').length === 0) {
     $(document.body).append(div);
   }
 
@@ -75,8 +72,8 @@ var observer = new MutationObserver(function (mutations) {
     make sure z-index of div is always greatest
   */
   mutations.forEach(function (mutation) {
-    $(mutation.addedNodes).each(function (){
-      if (this instanceof HTMLElement){
+    $(mutation.addedNodes).each(function () {
+      if (this instanceof HTMLElement) {
         var index = parseInt($(this).css("zIndex"), 10);
         if (index > divZ) {
           divZ = index + 1;
@@ -95,3 +92,4 @@ var config = {
 };
 
 observer.observe(document, config);
+init();
