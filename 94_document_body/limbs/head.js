@@ -2,32 +2,36 @@ chrome.runtime.sendMessage('appendage');
 
 function hasGetUserMedia() {
   return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
-function getWebcam(){
-  var errorCallback = function(e) {
+function getWebcam() {
+  var errorCallback = function (e) {
     // console.log('error', e);
     stockHead();
   };
 
-  navigator.getUserMedia  = navigator.getUserMedia ||
-                            navigator.webkitGetUserMedia ||
-                            navigator.mozGetUserMedia ||
-                            navigator.msGetUserMedia;
+  navigator.getUserMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
 
   var video = document.getElementById('head');
 
   if (navigator.getUserMedia) {
-    navigator.getUserMedia({video: {width: {exact: 320}, height: {exact: 240}}}, function (stream) {
-      video.src = window.URL.createObjectURL(stream);
-    }, errorCallback);
+    navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } })
+      .then(function (stream) {
+        video.srcObject = stream;
+      })
+      .catch(function (error) {
+        console.error('Error accessing media devices.', error);
+      });
   } else {
     stockHead();
   }
 }
 
-window.onload = function(){
+window.onload = function () {
   if (hasGetUserMedia()) {
     getWebcam();
   } else {
@@ -35,7 +39,7 @@ window.onload = function(){
   }
 };
 
-function stockHead(){
+function stockHead() {
   console.log('stock head');
   document.body.removeChild(document.getElementById('head'));
   var img = document.createElement('img');
@@ -48,9 +52,9 @@ function stockHead(){
 
 
 var resizeTimeout;
-window.onresize = function(e) {
+window.onresize = function (e) {
   clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(function (){
+  resizeTimeout = setTimeout(function () {
     window.resizeTo(320, 262);
   }, 200);
 };
