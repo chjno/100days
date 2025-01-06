@@ -1,12 +1,15 @@
 {
   "name": "Document Body",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "version": "0.1",
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
-  "permissions": [
-    "system.display"
-  ],
-  "web_accessible_resources": ["limbs/*"]
+  "permissions": ["system.display", "nativeMessaging"],
+  "web_accessible_resources": [
+    {
+      "resources": ["limbs/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

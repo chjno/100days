@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage('appendage');
+chrome.runtime.sendMessage('head');
 
 function hasGetUserMedia() {
   return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
