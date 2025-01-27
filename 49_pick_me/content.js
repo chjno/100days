@@ -1,23 +1,28 @@
 var mouseX;
 var mouseY;
+var mouseMoved = false;
 
-$(window).mousemove(function (e){
+$(window).mousemove(function (e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
+  if (!mouseMoved) {
+    mouseMoved = true;
+    requestAnimationFrame(toMouse);
+  }
 });
 
-function toMouse(){
-  $('a').each(function (){
+function toMouse() {
+  $('a').each(function () {
     var width = $(this).width();
     var height = $(this).height();
 
-    if (this.style.transform === ''){
+    if (this.style.transform === '') {
       this.style.display = 'block';
       this.style.transform = "matrix(1, 0, 0, 1, 0, 0)";
     }
 
-    var midX = $(this).offset().left + $(this).width()/2 - $(window).scrollLeft();
-    var midY = $(this).offset().top + $(this).height()/2 - $(window).scrollTop();
+    var midX = $(this).offset().left + $(this).width() / 2 - $(window).scrollLeft();
+    var midY = $(this).offset().top + $(this).height() / 2 - $(window).scrollTop();
 
     var angle = Math.atan2(midY - mouseY, midX - mouseX);
     var dy = Math.sin(angle) * 10;
@@ -33,6 +38,6 @@ function toMouse(){
     this.style.width = width + 'px';
     this.style.height = height + 'px';
   });
-}
 
-setInterval(toMouse, 500);
+  requestAnimationFrame(toMouse);
+}
