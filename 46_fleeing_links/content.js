@@ -23,7 +23,7 @@ function onMouseEnter(e) {
 
     function flee() {
       if (el.style.transform === '') {
-        el.style.display = 'block';
+        el.style.display = 'inline-block';
         el.style.transform = "matrix(1, 0, 0, 1, 0, 0)";
       }
 

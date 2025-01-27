@@ -17,7 +17,7 @@ function toMouse() {
     var height = $(this).height();
 
     if (this.style.transform === '') {
-      this.style.display = 'block';
+      this.style.display = 'inline-block';
       this.style.transform = "matrix(1, 0, 0, 1, 0, 0)";
     }
 
